@@ -23,4 +23,15 @@ public class ConexionDB {
             throw new RuntimeException("Error al conectar a la base de datos", e);
         }
     }
+
+    // Método para cerrar la conexión
+    public static void cerrarConexion(Connection conexion) {
+        if (conexion != null) {
+            try {
+                conexion.close();
+            } catch (SQLException e) {
+                throw new RuntimeException("Error al cerrar la conexión", e);
+            }
+        }
+    }
 }

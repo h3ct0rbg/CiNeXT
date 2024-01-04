@@ -1,0 +1,113 @@
+/* Estilos generales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+    font-family: 'Arial', sans-serif;
+    background-color: #3a3c43;
+    color: #edf0f1;
+}
+
+h2{
+    padding: 30px;
+}
+
+p {
+    padding: 20px;
+}
+
+.container {
+    position: relative;
+}
+
+.error, .sucess {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    display: inline-block;
+}
+
+.error {
+    background-color: red;
+    color: #ffffff;
+    border: 1px solid #ff4040;
+}
+
+.sucess {
+    background-color: green;
+    color: #ffffff;
+    border: 1px solid #45a049;
+}
+
+.fadeOut {
+    opacity: 0;
+}
+
+/* Estilos de formularios */
+form {
+    display: inline-block;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #aaa;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #666;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+a {
+    color: #0088a9;
+    text-decoration: none;
+}
+
+/* Estilos de header, section y footer */
+header, footer, section{
+    padding: 20px;
+    background-color: #24252a;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+header h1 {
+    color: #0088a9;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+}
+
+section {
+    text-align: center;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #777;
+}

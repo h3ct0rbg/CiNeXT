@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
             }
         } else {
             // Manejar el error o mostrar un mensaje al usuario
-            request.setAttribute("errorLogin", "Credenciales incorrectas, por favor, intenta nuevamente");
+            request.setAttribute("error", "Credenciales incorrectas, por favor, intenta nuevamente");
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);

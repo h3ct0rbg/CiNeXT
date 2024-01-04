@@ -25,21 +25,21 @@ public class RegisterServlet extends HttpServlet {
         switch (registro) {
             case 1 -> {
                 // Redirigir a la página de inicio de sesión si el registro fue exitoso
-                request.setAttribute("registered", "Usuario registrado correctamente");
-                RequestDispatcher dispatcher1 = request.getRequestDispatcher("index.jsp");
-                dispatcher1.forward(request, response);
+                request.setAttribute("sucess", "Usuario registrado correctamente");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+                dispatcher.forward(request, response);
             }
             case 2 -> {
                 // Manejar el error si el usuario ya se encuentra registrado
-                request.setAttribute("errorRegister", "El usuario ya se encuentra registrado");
-                RequestDispatcher dispatcher2 = request.getRequestDispatcher("register.jsp");
-                dispatcher2.forward(request, response);
+                request.setAttribute("error", "El usuario ya se encuentra registrado");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+                dispatcher.forward(request, response);
             }
             default -> {
                 // Manejar el error
-                request.setAttribute("errorRegister", "Error al registrar el usuario");
-                RequestDispatcher dispatcher2 = request.getRequestDispatcher("register.jsp");
-                dispatcher2.forward(request, response);
+                request.setAttribute("error", "Error al registrar el usuario");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+                dispatcher.forward(request, response);
             }
         }
     }
