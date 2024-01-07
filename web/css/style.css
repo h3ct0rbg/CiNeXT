@@ -16,7 +16,7 @@ h2{
 }
 
 p {
-    padding: 20px;
+    margin: 0;
 }
 
 .container {
@@ -48,10 +48,19 @@ p {
     opacity: 0;
 }
 
+.zoom {
+    display: flex;
+    justify-content: center;
+}
+
 /* Estilos de formularios */
 form {
     display: inline-block;
     text-align: left;
+}
+
+.modal {
+    width: 100%;
 }
 
 label {
@@ -68,6 +77,10 @@ input, select, textarea {
     background-color: #444;
     color: #fff;
     border: 1px solid #666;
+}
+
+section {
+    text-align: center;
 }
 
 button {
@@ -102,12 +115,9 @@ header h1 {
     text-align: center;
 }
 
-section {
-    text-align: center;
-}
-
 footer {
     margin-top: 20px;
+    padding: 50px;
     text-align: center;
     color: #777;
 }

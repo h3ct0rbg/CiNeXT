@@ -15,7 +15,7 @@ public class Usuario {
         this.pass = pass;
         this.tipoUsuario = tipoUsuario;
     }
-
+    
     // Getters
     public String getNombre() {
         return nombre;

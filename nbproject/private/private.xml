@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
         <file>
             <url>src/java/DAO/PeliculaDAO.java</url>
             <bookmark id="1">
@@ -12,11 +12,9 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/web/detallesPelicula.jsp</file>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/web/adminPeliculas.jsp</file>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/src/java/Controller/PeliculaServlet.java</file>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/web/areaUsuario.jsp</file>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/src/java/DAO/PeliculaDAO.java</file>
+            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/src/java/Controller/SesionServlet.java</file>
+            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/src/java/DAO/SesionDAO.java</file>
+            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/src/java/Model/Sesion.java</file>
         </group>
     </open-files>
 </project-private>

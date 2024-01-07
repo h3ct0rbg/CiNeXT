@@ -1,0 +1,25 @@
+.carrusel {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.dias-container {
+    display: flex;
+}
+
+.dia {
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+/* Estilo para el día seleccionado */
+.dia.seleccionado {
+    border-bottom: 3px solid #0088a9; /* Línea en el borde inferior de color #0088a9 */
+}
+
+.anterior, .siguiente {
+    padding: 20px;
+    cursor: pointer;
+}

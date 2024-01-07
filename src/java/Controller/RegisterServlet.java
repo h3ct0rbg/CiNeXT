@@ -9,10 +9,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/RegisterServlet")
+@WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/register.jsp").forward(request, response);
+    }
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("accion");
+        
+        switch (action) {
+            case "register" -> register(request, response);
+            default -> {
+                request.getRequestDispatcher("/register.jsp").forward(request, response);
+            }
+        }
+    }
+    
+    protected void register(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener parámetros del formulario
         String nombre = request.getParameter("nombre");
         String email = request.getParameter("email");
@@ -25,21 +42,19 @@ public class RegisterServlet extends HttpServlet {
         switch (registro) {
             case 1 -> {
                 // Redirigir a la página de inicio de sesión si el registro fue exitoso
-                request.setAttribute("sucess", "Usuario registrado correctamente");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-                dispatcher.forward(request, response);
+                request.getSession().setAttribute("sucess", "Usuario registrado correctamente");
+                response.sendRedirect(request.getContextPath() + "/login");
+
             }
             case 2 -> {
                 // Manejar el error si el usuario ya se encuentra registrado
-                request.setAttribute("error", "El usuario ya se encuentra registrado");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-                dispatcher.forward(request, response);
+                request.getSession().setAttribute("error", "El usuario ya se encuentra registrado");
+                response.sendRedirect(request.getContextPath() + "/login");
             }
             default -> {
                 // Manejar el error
-                request.setAttribute("error", "Error al registrar el usuario");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
-                dispatcher.forward(request, response);
+                request.getSession().setAttribute("errorMessage", "Error al registrar el usuario");
+                response.sendRedirect(request.getContextPath() + "/login");
             }
         }
     }

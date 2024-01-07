@@ -4,18 +4,18 @@ class MyHeader extends HTMLElement {
             <header>
                 <p class="menu"><i class="fas fa-bars"></i></p>
                 <div class="zoom">
-                    <a class="logo" href="/Cine/areaUsuario.jsp"><img src="img/logo.svg" alt="logo"></a>
+                    <a class="logo" href="/Cine"><img src="img/logo.svg" alt="logo"></a>
                 </div>
                 <nav>
                     <ul class="nav__links">
-                        <li class="zoom"><a href="/Cine/areaUsuario.jsp">Peliculas</a></li>
+                        <li class="zoom"><a href="/Cine">Peliculas</a></li>
                         <li class="zoom"><a href="#">Salas</a></li>
                         <li class="zoom"><a href="#">Estrenos</a></li>
                     </ul>
                 </nav>
                 <nav>
                     <div class="zoom">
-                        <form action="Logout" method="get">
+                        <form action="/Cine/logout" method="get">
                             <button type="submit" class="cta">Cerrar Sesión</button>
                         </form>
                     </div>
@@ -42,20 +42,20 @@ class MyHeaderAdmin extends HTMLElement {
             <header>
                 <p class="menu"><i class="fas fa-bars"></i></p>
                 <div class="zoom">
-                    <a class="logo" href="/Cine/areaUsuario.jsp"><img src="img/logo.svg" alt="logo"></a>
+                    <a class="logo" href="/Cine"><img src="../img/logo.svg" alt="logo"></a>
                 </div>
                 <nav>
                     <ul class="nav__links">
-                        <li class="zoom"><a href="adminPeliculas.jsp">Peliculas</a></li>
-                        <li class="zoom"><a href="#">Salas</a></li>
-                        <li class="zoom"><a href="#">Entradas</a></li>
-                        <li class="zoom"><a href="#">Reservas</a></li>
-                        <li class="zoom"><a href="#">Informes</a></li>
+                        <li class="zoom"><a href="/Cine/admin/peliculas">Peliculas</a></li>
+                        <li class="zoom"><a href="/Cine/admin/salas">Salas</a></li>
+                        <li class="zoom"><a href="/Cine/admin/sesiones">Sesiones</a></li>
+                        <li class="zoom"><a href="/Cine/admin/entradas">Entradas</a></li>
+                        <li class="zoom"><a href="/Cine/admin/informes">Informes</a></li>
                     </ul>
                 </nav>
                 <nav>
                     <div class="zoom">
-                        <form action="Logout" method="get">
+                        <form action="/Cine/logout" method="get">
                             <button type="submit" class="cta">Cerrar Sesión</button>
                         </form>
                     </div>
@@ -65,11 +65,11 @@ class MyHeaderAdmin extends HTMLElement {
             <div class="overlay">
                 <a class="close">&times;</a>
                 <div class="overlay__content">
-                    <a href="#">Peliculas</a>
-                    <a href="#">Salas</a>
-                    <a href="#">Entradas</a>
-                    <a href="#">Reservas</a>
-                    <a href="#">Informes</a>
+                    <a href="/Cine/admin/peliculas">Peliculas</a>
+                    <a href="/Cine/admin/salas">Salas</a>
+                    <a href="/Cine/admin/sesiones">Sesiones</a>
+                    <a href="/Cine/admin/entradas">Entradas</a>
+                    <a href="/Cine/admin/informes">Informes</a>
                 </div>
             </div>
         `

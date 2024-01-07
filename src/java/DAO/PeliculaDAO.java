@@ -87,6 +87,42 @@ public class PeliculaDAO {
         return pelicula;
     }
 
+    // Método para mostrar todas las películas
+    public List<Pelicula> mostrarPeliculas() {
+        List<Pelicula> peliculas = new ArrayList<>();
+
+        try {
+            // Consulta SQL para obtener todas las películas
+            String consulta = "SELECT id, titulo, sinopsis, anio, genero, duracion, director, clasificacionedad, imagen FROM peliculas";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Crear objeto Pelicula con los datos obtenidos de la base de datos
+                int id = resultSet.getInt("id");
+                String titulo = resultSet.getString("titulo");
+                String sinopsis = resultSet.getString("sinopsis");
+                int anio = resultSet.getInt("anio");
+                String genero = resultSet.getString("genero");
+                int duracion = resultSet.getInt("duracion");
+                String director = resultSet.getString("director");
+                String clasificacionEdad = resultSet.getString("clasificacionedad");
+                byte[] imagen = resultSet.getBytes("imagen");
+
+                Pelicula pelicula = new Pelicula(id, titulo, sinopsis, anio, genero, duracion, director, clasificacionEdad, imagen);
+                peliculas.add(pelicula);
+            }
+
+        } catch (SQLException e) {
+            // Manejar la excepción
+        } finally {
+            ConexionDB.cerrarConexion(conexion);
+        }
+
+        return peliculas;
+    }
+
     // Método para insertar una nueva película en la base de datos
     public int insertarPelicula(Pelicula pelicula) {
         try {

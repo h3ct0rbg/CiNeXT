@@ -6,15 +6,15 @@ import java.sql.SQLException;
 
 public class ConexionDB {
 
-    private static final String URL = "jdbc:derby://localhost:1527/cine";
-    private static final String USUARIO = "app";
-    private static final String CONTRASENA = "app";
+    private static final String URL = "jdbc:postgresql://localhost:5432/cinext";
+    private static final String USUARIO = "postgres";
+    private static final String CONTRASENA = "root";
 
     // Método para obtener una conexión a la base de datos
     public static Connection obtenerConexion() {
         try {
             // Cargar el driver de la base de datos
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Class.forName("org.postgresql.Driver");
 
             // Establecer la conexión
             return DriverManager.getConnection(URL, USUARIO, CONTRASENA);

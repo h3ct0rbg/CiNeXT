@@ -5,11 +5,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
         <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
         <script type="text/javascript" src="js/fadeout.js"></script>
         <script type="text/javascript" src="js/htmlElements.js"></script>
-        <title>CiNeXT - Register</title>
+        <title>CiNeXT</title>
     </head>
     <body>        
         <header>
@@ -31,7 +30,7 @@
                 <% } %>
             </div>
             
-            <form action="RegisterServlet" method="post">
+            <form action="register?accion=register" method="post">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
@@ -43,7 +42,7 @@
 
                 <button type="submit">Registrarse</button>
             </form>
-            <p>¿Ya tienes una cuenta? <a href="index.jsp">Inicia sesión aquí</a></p>
+            <p>¿Ya tienes una cuenta? <a href="/Cine/login">Inicia sesión aquí</a></p>
         </section>
 
         <my-footer></my-footer>

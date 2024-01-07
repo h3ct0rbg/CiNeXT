@@ -10,7 +10,7 @@
     Usuario usuario = (Usuario) session.getAttribute("usuario");
     if (usuario == null || !usuario.getTipoUsuario().equals("Admin")) {
         // Si el usuario no es un administrador, redirigir o mostrar un mensaje de error
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("/Cine/login");
     }
 %>
 
@@ -22,18 +22,17 @@
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
         <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="css/peliculas.css">
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
-        <script type="text/javascript" src="js/fadeout.js"></script>
-        <script type="text/javascript" src="js/htmlElements.js"></script>
-        <title>CineWeb - Área de Administración</title>
+        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../css/peliculas.css">
+        <script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+        <script type="text/javascript" src="../js/fadeout.js"></script>
+        <script type="text/javascript" src="../js/htmlElements.js"></script>
+        <title>CiNeXT</title>
     </head>
     <body>
     <my-header-admin></my-header-admin> <!-- Header personalizado -->
-    <script type="text/javascript" src="js/mobile.js"></script>
+    <script type="text/javascript" src="../js/mobile.js"></script>
 
     <!-- Mostrar el mensaje de error si está presente -->
     <div class="container d-flex align-items-center justify-content-center mt-2">
@@ -55,23 +54,6 @@
         <% } %>
     </div>
 
-    <%
-        // Obtener la lista de películas desde la base de datos
-        PeliculaDAO peliculaDAO = new PeliculaDAO();
-        List<Pelicula> peliculas;
-
-        // Verificar si se realizó una búsqueda
-        String busqueda = request.getParameter("busqueda");
-        if (busqueda != null && !busqueda.isEmpty()) {
-            // Si se realizó una búsqueda, utilizar la lista de películas coincidentes
-            peliculas = (List<Pelicula>) request.getAttribute("peliculas");
-        } else {
-            // Si no hay búsqueda o la búsqueda es vacía, obtener todas las películas
-            peliculas = peliculaDAO.getAllPeliculas();
-        }
-    %>
-
-
     <div class="tabla">
         <div class="filas">
             <div class="columnas">
@@ -79,9 +61,11 @@
                     <thead>
 
                         <!-- Bucador -->                               
-                    <form action="peliculas?accion=buscar" method="post">
+                    <form action="peliculas" method="post">
+                        <input type="hidden" name="accion" value="buscar">
                         <th scope="col" colspan="2">
                             <input type="search" name="busqueda" class="form-control mb-0" placeholder="Buscar película">
+                        </th>
                         <th scope="col">
                             <button type="submit" class="btn btn-outline-info"> Buscar</button>
                         </th>
@@ -90,7 +74,7 @@
                     <th scope="col" colspan="5"></th>
 
                     <!-- Añadir película -->
-                    <th scope="col">
+                    <th scope="col" class="text-center align-middle">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#addModal"> Añadir </button>
                     </th>
 
@@ -107,8 +91,8 @@
                     </tr>
                     </thead>
                     <%
-                    // Iterar sobre la lista de películas y mostrar la información
-                    for (Pelicula pelicula : peliculas) {
+                        List<Pelicula> peliculas = (List) request.getAttribute("peliculas");
+                        for(Pelicula pelicula : peliculas){
                     %>
                     <tbody>
                         <tr>
@@ -129,7 +113,8 @@
                                 </button>
 
                                 <!-- Simbolo eliminar -->
-                                <form action="peliculas?accion=eliminar" method="post">
+                                <form action="peliculas" method="post">
+                                    <input type="hidden" name="accion" value="eliminar">
                                     <input type="hidden" name="titulo" value="<%=pelicula.getTitulo()%>">
                                     <button type="submit" class="btn btn-outline-danger btnEliminar mb-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
@@ -152,7 +137,8 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="container-form-modal">
-                                        <form action="peliculas?accion=modificar" method="post" enctype="multipart/form-data">
+                                        <form action="peliculas" method="post" enctype="multipart/form-data">
+                                            <input type="hidden" name="accion" value="modificar">
                                             <!-- ID -->
                                             <input type="hidden" id="id" name="id" value="<%= pelicula.getId()%>"
                                             
@@ -234,7 +220,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-form-modal">
-                        <form action="peliculas?accion=crear" method="post" enctype="multipart/form-data">
+                        <form action="peliculas" method="post" enctype="multipart/form-data" class="w-100">
+                            <input type="hidden" name="accion" value="crear">
                             <!-- Titulo -->
                             <label for="titulo">Título:</label>
                             <input type="text" id="titulo" name="titulo" required><br>
