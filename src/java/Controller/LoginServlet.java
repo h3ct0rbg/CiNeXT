@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         switch (action) {
             case "login" -> login(request, response);
             default -> {
-                request.getRequestDispatcher("/login.jsp").forward(request, response);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
         }
     }

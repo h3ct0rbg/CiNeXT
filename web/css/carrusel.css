@@ -1,7 +1,9 @@
+/* Estilos para tamaños mayores a dispositivos móviles */
 .carrusel {
     display: flex;
     justify-content: center;
     padding: 20px;
+    overflow-x: auto; /* Permitir desplazamiento horizontal en dispositivos móviles */
 }
 
 .dias-container {
@@ -14,6 +16,10 @@
     cursor: pointer;
 }
 
+.dia:hover {
+    transform: scale(1.05);
+}
+
 /* Estilo para el día seleccionado */
 .dia.seleccionado {
     border-bottom: 3px solid #0088a9; /* Línea en el borde inferior de color #0088a9 */
@@ -22,4 +28,26 @@
 .anterior, .siguiente {
     padding: 20px;
     cursor: pointer;
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 768px) {
+    .carrusel {
+        flex-direction: row; /* Cambiar a dirección de fila en dispositivos móviles */
+        align-items: flex-start; /* Alinear elementos en la parte superior en dispositivos móviles */
+        white-space: nowrap; /* Evitar el retorno de línea en dispositivos móviles */
+    }
+
+    .dias-container {
+        flex-direction: row; /* Cambiar a dirección de fila en dispositivos móviles */
+        overflow-x: auto; /* Permitir desplazamiento horizontal en dispositivos móviles */
+    }
+
+    .dia {
+        margin: 5px; /* Reducir el margen en dispositivos móviles */
+    }
+
+    .anterior, .siguiente {
+        padding: 10px; /* Reducir el padding en dispositivos móviles */
+    }
 }

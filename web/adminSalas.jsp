@@ -24,6 +24,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../css/admin.css">
         <script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
         <script type="text/javascript" src="../js/fadeout.js"></script>
         <script type="text/javascript" src="../js/htmlElements.js"></script>

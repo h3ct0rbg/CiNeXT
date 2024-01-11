@@ -1,0 +1,22 @@
+section {
+    padding: 50px;
+}
+
+.container {
+    display: inline-grid;
+    justify-content: center;
+    text-align: left;
+}
+
+h2 {
+    margin-bottom: 50px;
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+button {
+    width: 100%
+}

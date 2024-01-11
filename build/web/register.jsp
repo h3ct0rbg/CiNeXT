@@ -40,7 +40,7 @@
                 <label for="password">Contraseña:</label>
                 <input type="password" id="password" name="password" required>
 
-                <button type="submit">Registrarse</button>
+                <button type="submit">Registrarse</button><br><br>
             </form>
             <p>¿Ya tienes una cuenta? <a href="/Cine/login">Inicia sesión aquí</a></p>
         </section>

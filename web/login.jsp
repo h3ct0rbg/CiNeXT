@@ -4,21 +4,21 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src="js/jquery-3.7.1.js"></script>
-        <script type="text/javascript" src="js/fadeout.js"></script>
-        <script type="text/javascript" src="js/htmlElements.js"></script>
+        <link rel="stylesheet" type="text/css" href="/Cine/css/style.css">
+        <script type="text/javascript" src="/Cine/js/jquery-3.7.1.js"></script>
+        <script type="text/javascript" src="/Cine/js/fadeout.js"></script>
+        <script type="text/javascript" src="/Cine/js/htmlElements.js"></script>
         <title>CiNeXT</title>
     </head>
     <body>       
         <header>
             <div class="zoom">
-                <a class="logo" href="/Cine"><img src="img/logo.svg" alt="logo"></a>
+                <a class="logo" href="/Cine"><img src="/Cine/img/logo.svg" alt="logo"></a>
             </div>
         </header>
 
         <section>
-            <h2>Inicia sesión</h2>
+            <h2 class="login">Inicia sesión</h2>
 
             <!-- Mostrar el mensaje de error si está presente -->
             <div class="container">
@@ -46,7 +46,7 @@
                 <% } %>
             </div>
 
-            <form action="login?accion=login" method="post">
+            <form action="/Cine/login?accion=login" method="post">
                 <label for="email">Correo Electrónico:</label>
                 <input type="email" id="email" name="email" required>
 

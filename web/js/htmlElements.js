@@ -4,7 +4,45 @@ class MyHeader extends HTMLElement {
             <header>
                 <p class="menu"><i class="fas fa-bars"></i></p>
                 <div class="zoom">
-                    <a class="logo" href="/Cine"><img src="img/logo.svg" alt="logo"></a>
+                    <a class="logo" href="/Cine"><img src="/Cine/img/logo.svg" alt="logo"></a>
+                </div>
+                <nav>
+                    <ul class="nav__links">
+                        <li class="zoom"><a href="/Cine">Peliculas</a></li>
+                        <li class="zoom"><a href="#">Salas</a></li>
+                        <li class="zoom"><a href="#">Estrenos</a></li>
+                    </ul>
+                </nav>
+                <nav>
+                    <div class="zoom">
+                        <form action="/Cine/login" method="get">
+                            <button type="submit" class="cta">Iniciar Sesión</button>
+                        </form>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="overlay">
+                <a class="close">&times;</a>
+                <div class="overlay__content">
+                    <a href="/Cine">Peliculas</a>
+                    <a href="#">Salas</a>
+                    <a href="#">Estrenos</a>
+                </div>
+            </div>
+        `
+    }
+}
+
+customElements.define('my-header', MyHeader);
+
+class MyHeaderLogged extends HTMLElement {
+    connectedCallback(){
+        this.innerHTML = `
+            <header>
+                <p class="menu"><i class="fas fa-bars"></i></p>
+                <div class="zoom">
+                    <a class="logo" href="/Cine"><img src="/Cine/img/logo.svg" alt="logo"></a>
                 </div>
                 <nav>
                     <ul class="nav__links">
@@ -25,7 +63,7 @@ class MyHeader extends HTMLElement {
             <div class="overlay">
                 <a class="close">&times;</a>
                 <div class="overlay__content">
-                    <a href="/Cine/areaUsuario.jsp">Peliculas</a>
+                    <a href="/Cine">Peliculas</a>
                     <a href="#">Salas</a>
                     <a href="#">Estrenos</a>
                 </div>
@@ -34,7 +72,7 @@ class MyHeader extends HTMLElement {
     }
 }
 
-customElements.define('my-header', MyHeader);
+customElements.define('my-header-logged', MyHeaderLogged);
 
 class MyHeaderAdmin extends HTMLElement {
     connectedCallback(){
@@ -42,7 +80,7 @@ class MyHeaderAdmin extends HTMLElement {
             <header>
                 <p class="menu"><i class="fas fa-bars"></i></p>
                 <div class="zoom">
-                    <a class="logo" href="/Cine"><img src="../img/logo.svg" alt="logo"></a>
+                    <a class="logo" href="/Cine"><img src="/Cine/img/logo.svg" alt="logo"></a>
                 </div>
                 <nav>
                     <ul class="nav__links">

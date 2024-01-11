@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
             diaElemento.classList.add('dia');
             diaElemento.textContent = obtenerFormatoFecha(dia);
 
-            // Agrega evento de clic para seleccionar el día y redirigir a otra página
+            // Agrega evento de clic para seleccionar el día y mostrar sesiones
             diaElemento.addEventListener('click', function () {
                 seleccionarDia(this);
             });
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function avanzarDias() {
-        if (fechaActual.getDate() < new Date().getDate() + 30) {
+        if (fechaActual.getDate() < new Date().getDate() + 23) {
             fechaActual.setDate(fechaActual.getDate() + 1);
             actualizarDias();
         }
@@ -63,24 +63,32 @@ document.addEventListener('DOMContentLoaded', function () {
         const fechaDiaSeleccionado = new Date(fechaActual);
         fechaDiaSeleccionado.setDate(fechaActual.getDate() + Array.from(diasContainer.children).indexOf(diaElemento));
 
-        // Crea un enlace (<a>) dinámicamente y lo simula haciendo clic para redirigir
-        const enlace = document.createElement('a');
-        enlace.href = `pelicula?fecha=${fechaDiaSeleccionado.toISOString()}`;
-        enlace.click();
+        // Muestra las sesiones correspondientes a la fecha seleccionada
+        mostrarSesiones(fechaDiaSeleccionado);
     }
 
+    function mostrarSesiones(fechaSeleccionada) {
+        const sesionesContainer = document.querySelector('.sesiones-container');
+        const sesiones = sesionesContainer.querySelectorAll('.sesion');
+
+        // Oculta todas las sesiones
+        sesiones.forEach(sesion => {
+            sesion.style.display = 'none';
+        });
+
+        // Muestra las sesiones correspondientes a la fecha seleccionada
+        const fechaSeleccionadaString = fechaSeleccionada.toISOString().split('T')[0];
+        const sesionesFechaSeleccionada = sesionesContainer.querySelectorAll(`.sesion[id="${fechaSeleccionadaString}"]`);
+
+        sesionesFechaSeleccionada.forEach(sesion => {
+            sesion.style.display = 'block';
+        });
+    }
 
     // Inicializa el carrusel
     actualizarDias();
 
     // Agrega eventos a los botones
     anteriorBtn.addEventListener('click', retrocederDias);
-    siguienteBtn.addEventListener('click', avanzarDias);
-
-    // Agrega evento de teclado para retroceder (tecla retroceso)
-    document.addEventListener('keydown', function (event) {
-        if (event.key === 'Backspace') {
-            retrocederDias();
-        }
-    });
+    siguienteBtn.addEventListener('click', avanzarDias);  
 });

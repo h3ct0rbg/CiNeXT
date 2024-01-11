@@ -1,27 +1,49 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="Model.Usuario" %>
 <%@ page import="Model.Pelicula" %>
+<%@ page import="Model.Sesion" %>
 <%@ page import="DAO.PeliculaDAO" %>
+<%@ page import="DAO.SesionDAO" %>
 <%@ page import="java.lang.Integer" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.sql.Time" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CiNeXT</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:500&display=swap">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link rel="stylesheet" type="text/css" href="css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="css/peliculas.css">
-        <link rel="stylesheet" type="text/css" href="css/detallesPelicula.css">
-        <link rel="stylesheet" type="text/css" href="css/carrusel.css">
-        <script type="text/javascript" src="js/htmlElements.js"></script>
+        <link rel="stylesheet" type="text/css" href="/Cine/css/style.css">
+        <link rel="stylesheet" type="text/css" href="/Cine/css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="/Cine/css/peliculas.css">
+        <link rel="stylesheet" type="text/css" href="/Cine/css/detallesPelicula.css">
+        <link rel="stylesheet" type="text/css" href="/Cine/css/carrusel.css">
+        <script type="text/javascript" src="/Cine/js/htmlElements.js"></script>
+        <title>CiNeXT</title>
     </head>
     <body>
+
+        <% 
+        // Verificar si la sesión está iniciada
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        if (usuario == null) {
+        %>
     <my-header></my-header> <!-- Header personalizado -->
-    <script type="text/javascript" src="js/mobile.js"></script>
+        <%
+            } else {
+        %>
+    <my-header-logged></my-header-logged> <!-- Header personalizado para sesión iniciada -->
+        <%
+            }
+        %>
+
+    <script type="text/javascript" src="/Cine/js/mobile.js"></script>
+
+
     <%
         Pelicula pelicula = (Pelicula) request.getAttribute("pelicula");
     %>
@@ -52,6 +74,33 @@
             <button id="siguiente">&gt;</button>
         </div>
         <script src="js/carrusel.js"></script>
+
+        <div class="sesiones-container">
+            <%
+                List<Sesion> sesiones = (List) request.getAttribute("sesiones");
+                for(Sesion sesion : sesiones){
+            %>
+            <a href="/Cine/pelicula/sesion?idSesion=<%= sesion.getId()%>">
+                <div class="sesion" id="<%= sesion.getFecha() %>">
+                    <%
+                    // Obtén la hora de la sesión
+                    Time horaSesion = sesion.getHora();
+
+                    // Crea un objeto SimpleDateFormat para formatear la hora
+                    SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm");
+
+                    // Formatea la hora y obtén la representación en formato "00:00"
+                    String hora = formatoHora.format(horaSesion);
+                    %>
+                    <p><%= hora %></p>
+                    <p><%= sesion.getNombreSala() %></p>
+                </div>
+            </a>
+            <%    
+                }
+            %>
+        </div>
+
 
     </section>
 </body>

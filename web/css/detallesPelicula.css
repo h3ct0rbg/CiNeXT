@@ -54,6 +54,22 @@ section {
     margin-bottom: 5px; /* Ajusta el espacio entre h3 y p */
 }
 
+.sesiones-container {
+    display: flex;
+    justify-content: center;
+}
+
+.sesion {
+    display: none;
+    padding: 20px;
+    margin: 10px;
+    border: 2px solid;
+}
+
+.sesion:hover {
+    transform: scale(1.05);
+}
+
 /* Consulta de medios para pantallas más pequeñas */
 @media (max-width: 768px) {
     .detalles-pelicula {

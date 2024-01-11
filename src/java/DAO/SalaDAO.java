@@ -17,6 +17,38 @@ public class SalaDAO {
         this.conexion = ConexionDB.obtenerConexion();
     }
 
+    // Método para obtener una sala por su ID
+    public Sala getSalaById(int idSala) {
+        Sala sala = null;
+
+        try {
+            // Consulta SQL para obtener una sala por su ID
+            String consulta = "SELECT id, filas, columnas, tipo, nombre FROM salas WHERE id=?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setInt(1, idSala);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                // Crear objeto Sala con los datos obtenidos de la base de datos
+                int id = resultSet.getInt("id");
+                int filas = resultSet.getInt("filas");
+                int columnas = resultSet.getInt("columnas");
+                String tipo = resultSet.getString("tipo");
+                String nombre = resultSet.getString("nombre");
+
+                sala = new Sala(id, filas, columnas, tipo, nombre);
+            }
+
+        } catch (SQLException e) {
+            // Manejar la excepción
+        } finally {
+            ConexionDB.cerrarConexion(conexion);
+        }
+
+        return sala;
+    }
+
     // Método para mostrar todas las salas
     public List<Sala> mostrarSalas() {
         List<Sala> salas = new ArrayList<>();
@@ -57,7 +89,7 @@ public class SalaDAO {
                 // La sala ya existe, retorna un código de error
                 return 2;
             }
-            
+
             // Consulta SQL para insertar una nueva sala
             String consulta = "INSERT INTO salas (filas, columnas, tipo, nombre) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(consulta);

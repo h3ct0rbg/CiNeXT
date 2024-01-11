@@ -1,6 +1,8 @@
 package DAO;
 
 import Model.Sesion;
+import Model.Asiento;
+import Model.Sala;
 import java.sql.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -15,6 +17,86 @@ public class SesionDAO {
         this.conexion = ConexionDB.obtenerConexion();
     }
 
+    // Método para obtener sesiones de una película por su ID
+    public Sesion getSesionById(int idSesion) {
+        Sesion sesion = null;
+
+        try {
+            // Consulta SQL para obtener sesiones de una película por su ID
+            String consulta = "SELECT s.id, fecha, hora, salaId, nombre, peliculaId, titulo, asientos FROM sesiones s "
+                    + "INNER JOIN peliculas p ON s.peliculaId = p.id "
+                    + "INNER JOIN salas sa ON s.salaId = sa.id "
+                    + "WHERE s.id = ?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+
+            // Establecer el valor del parámetro de la consulta
+            statement.setInt(1, idSesion);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                // Crear objeto Sesion con los datos obtenidos de la base de datos
+                int id = resultSet.getInt("id");
+                Date fecha = resultSet.getDate("fecha");
+                Time hora = resultSet.getTime("hora");
+                int salaId = resultSet.getInt("salaId");
+                int peliculaId = resultSet.getInt("peliculaId");
+                String nombreSala = resultSet.getString("nombre");
+                String tituloPelicula = resultSet.getString("titulo");
+                byte[] asientos = resultSet.getBytes("asientos");
+
+                sesion = new Sesion(id, fecha, hora, salaId, peliculaId, nombreSala, tituloPelicula, asientos);
+            }
+
+        } catch (SQLException e) {
+            // Manejar la excepción
+        } finally {
+            ConexionDB.cerrarConexion(conexion);
+        }
+
+        return sesion;
+    }
+
+    // Método para obtener sesiones de una película por su ID de pelicula
+    public List<Sesion> getSesionByPelicula(int idPelicula) {
+        List<Sesion> sesiones = new ArrayList<>();
+
+        try {
+            // Consulta SQL para obtener sesiones de una película por su ID de pelicula
+            String consulta = "SELECT s.id, fecha, hora, salaId, nombre, peliculaId, titulo FROM sesiones s "
+                    + "INNER JOIN peliculas p ON s.peliculaId = p.id "
+                    + "INNER JOIN salas sa ON s.salaId = sa.id "
+                    + "WHERE s.peliculaId = ? ORDER BY s.id";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+
+            // Establecer el valor del parámetro de la consulta
+            statement.setInt(1, idPelicula);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Crear objeto Sesion con los datos obtenidos de la base de datos
+                int id = resultSet.getInt("id");
+                Date fecha = resultSet.getDate("fecha");
+                Time hora = resultSet.getTime("hora");
+                int salaId = resultSet.getInt("salaId");
+                int peliculaId = resultSet.getInt("peliculaId");
+                String nombreSala = resultSet.getString("nombre");
+                String tituloPelicula = resultSet.getString("titulo");
+
+                Sesion sesion = new Sesion(id, fecha, hora, salaId, peliculaId, nombreSala, tituloPelicula);
+                sesiones.add(sesion);
+            }
+
+        } catch (SQLException e) {
+            // Manejar la excepción
+        } finally {
+            ConexionDB.cerrarConexion(conexion);
+        }
+
+        return sesiones;
+    }
+
     // Método para insertar una sesión
     public int insertarSesion(Sesion sesion) {
         try {
@@ -23,7 +105,7 @@ public class SesionDAO {
             }
 
             // Consulta SQL para insertar una nueva sala
-            String consulta = "INSERT INTO Sesiones (fecha, hora, salaId, peliculaId) VALUES (?, ?, ?, ?)";
+            String consulta = "INSERT INTO Sesiones (fecha, hora, salaId, peliculaId, asientos) VALUES (?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(consulta);
 
             // Establecer los valores de los parámetros de la consulta
@@ -31,6 +113,7 @@ public class SesionDAO {
             statement.setTime(2, sesion.getHora());
             statement.setInt(3, sesion.getSalaId());
             statement.setInt(4, sesion.getPeliculaId());
+            statement.setBytes(5, null);
 
             // Ejecutar la consulta
             int filasAfectadas = statement.executeUpdate();
@@ -52,7 +135,10 @@ public class SesionDAO {
 
         try {
             // Consulta SQL para mostrar todas las sesiones
-            String consulta = "SELECT s.id, fecha, hora, salaId, nombre, peliculaId, titulo FROM sesiones s INNER JOIN peliculas p ON s.peliculaId = p.id INNER JOIN salas sa ON s.salaId = sa.id ORDER BY s.id";
+            String consulta = "SELECT s.id, fecha, hora, salaId, nombre, peliculaId, titulo FROM sesiones s "
+                    + "INNER JOIN peliculas p ON s.peliculaId = p.id "
+                    + "INNER JOIN salas sa ON s.salaId = sa.id "
+                    + "ORDER BY s.id";
             PreparedStatement statement = conexion.prepareStatement(consulta);
 
             ResultSet resultSet = statement.executeQuery();
@@ -68,7 +154,7 @@ public class SesionDAO {
                 String tituloPelicula = resultSet.getString("titulo");
 
                 // Crear objeto Sesion con el constructor correspondiente
-                Sesion sesion = new Sesion(id, fecha, hora, salaId, peliculaId);
+                Sesion sesion = new Sesion(id, fecha, hora, salaId, peliculaId, nombreSala, tituloPelicula);
                 sesion.setNombreSala(nombreSala);
                 sesion.setNombrePelicula(tituloPelicula);
                 sesiones.add(sesion);
@@ -88,6 +174,9 @@ public class SesionDAO {
         try {
             if (existeSesionActualizar(sesion)) {
                 return 2;
+            }
+            if (sesion.getAsientosReservados() != null) {
+                return 3;
             }
 
             // Consulta SQL para actualizar una sesión
@@ -185,6 +274,48 @@ public class SesionDAO {
         return sesiones;
     }
 
+    // Método para agregar reservas de asientos a una sesión
+    public boolean addReservaAsientos(int idSesion, List<Asiento> asientos) {
+        try {
+            // Obtener la sesión por su ID
+            Sesion sesion = getSesionById(idSesion);
+            this.conexion = ConexionDB.obtenerConexion();
+            SalaDAO salaDAO = new SalaDAO();
+            Sala sala = salaDAO.getSalaById(sesion.getSalaId());
+
+            // Obtener los asientos reservados actuales (si los hay)
+            byte[] asientosReservados = sesion.getAsientosReservados();
+            if (asientosReservados == null) {
+                asientosReservados = new byte[sala.getFilas() * sala.getColumnas() / 8];
+            }
+
+            // Modificar el array de asientos reservados
+            for (Asiento asiento : asientos) {
+                int index = (asiento.getFilas() - 1) * sala.getColumnas() + asiento.getColumnas() - 1;
+                int byteIndex = index / 8;
+                int bitIndex = index % 8;
+                asientosReservados[byteIndex] |= (1 << bitIndex);
+            }
+
+            // Actualizar la sesión con los nuevos asientos reservados
+            String consulta = "UPDATE sesiones SET asientos = ? WHERE id = ?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setBytes(1, asientosReservados);
+            statement.setInt(2, idSesion);
+
+            // Ejecutar la consulta
+            int filasAfectadas = statement.executeUpdate();
+
+            // Verificar si se actualizó correctamente
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            ConexionDB.cerrarConexion(conexion);
+        }
+    }
+
     // Método para verificar si existe alguna sesión en el rango de tiempo de la nueva sesión
     public boolean existeSesion(Sesion sesion) {
         try {
@@ -219,7 +350,7 @@ public class SesionDAO {
 
         return false;
     }
-    
+
     // Método para verificar si existe alguna sesión en el rango de tiempo de la nueva sesión
     public boolean existeSesionActualizar(Sesion sesion) {
         try {
@@ -240,7 +371,7 @@ public class SesionDAO {
             statement.setTime(5, sesion.getHora());
             statement.setTime(6, horaFinNuevaSesion);
             statement.setInt(7, sesion.getId());
-            
+
             ResultSet resultSet = statement.executeQuery();
 
             // Verificar si hay alguna sesión en el rango de tiempo

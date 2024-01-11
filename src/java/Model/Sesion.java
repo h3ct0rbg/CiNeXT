@@ -11,8 +11,13 @@ public class Sesion {
     private String nombreSala;
     private int peliculaId;
     private String nombrePelicula;
+    private byte[] asientosReservados;
 
     //Constructor
+    public Sesion(){
+        //Constructor vacío
+    }
+    
     public Sesion(Date fecha, Time hora, int salaId, int peliculaId) {
         this.fecha = fecha;
         this.hora = hora;
@@ -26,6 +31,27 @@ public class Sesion {
         this.hora = hora;
         this.salaId = salaId;
         this.peliculaId = peliculaId;
+    }
+
+    public Sesion(int id, Date fecha, Time hora, int salaId, int peliculaId, String nombreSala, String tituloPelicula) {
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.salaId = salaId;
+        this.peliculaId = peliculaId;
+        this.nombreSala = nombreSala;
+        this.nombrePelicula = tituloPelicula;
+    }
+    
+    public Sesion(int id, Date fecha, Time hora, int salaId, int peliculaId, String nombreSala, String tituloPelicula, byte[] asientosReservados) {
+        this.id = id;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.salaId = salaId;
+        this.peliculaId = peliculaId;
+        this.nombreSala = nombreSala;
+        this.nombrePelicula = tituloPelicula;
+        this.asientosReservados = asientosReservados;
     }
 
     //Getters
@@ -56,6 +82,10 @@ public class Sesion {
     public String getNombrePelicula() {
         return nombrePelicula;
     }
+
+    public byte[] getAsientosReservados() {
+        return asientosReservados;
+    }
     
     //Setters
     public void setFecha(Date fecha) {
@@ -80,5 +110,9 @@ public class Sesion {
 
     public void setNombrePelicula(String nombrePelicula) {
         this.nombrePelicula = nombrePelicula;
+    }
+
+    public void setAsientosReservados(byte[] asientosReservados) {
+        this.asientosReservados = asientosReservados;
     }
 }

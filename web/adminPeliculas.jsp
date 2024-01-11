@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="../css/style.css">
         <link rel="stylesheet" type="text/css" href="../css/navbar.css">
         <link rel="stylesheet" type="text/css" href="../css/peliculas.css">
+        <link rel="stylesheet" type="text/css" href="../css/admin.css">
         <script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
         <script type="text/javascript" src="../js/fadeout.js"></script>
         <script type="text/javascript" src="../js/htmlElements.js"></script>
