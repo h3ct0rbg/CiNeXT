@@ -39,14 +39,17 @@
             <div class="columnas">
                 <table class="table table-striped">
                     <thead>
-                    <th scope="col" colspan="5"></th>
+                    <th scope="col" colspan="8"></th>
 
                     <tr>
                         <th scope="col" class="text-center">ID</th>
-                        <th scope="col" class="text-center">SESIÓN</th>
-                        <th scope="col" class="text-center">FILAS</th>
-                        <th scope="col" class="text-center">COLUMNAS</th>
+                        <th scope="col" class="text-center">FECHA</th>
+                        <th scope="col" class="text-center">FILA</th>
+                        <th scope="col" class="text-center">COLUMNA</th>
                         <th scope="col" class="text-center">CLIENTE</th>
+                        <th scope="col" class="text-center">EMAIL</th>
+                        <th scope="col" class="text-center">SALA</th>
+                        <th scope="col" class="text-center">PELICULA</th>
                     </tr>
                     </thead>
                     <%
@@ -56,10 +59,13 @@
                     <tbody>
                         <tr>
                             <td class="id text-center align-middle"><p><%= entrada.getId()%></p></td>
-                            <td class="sesionId text-center align-middle"><p><%= entrada.getSesionId()%></p></td>
+                            <td class="id text-center align-middle"><p><%= entrada.getFecha()%></p></td>
                             <td class="filas text-center align-middle"><p><%= entrada.getFilas()%></p></td>
                             <td class="columnas text-center align-middle"><p><%= entrada.getColumnas()%></p></td>
+                            <td class="columnas text-center align-middle"><p><%= entrada.getNombreUsuario()%></p></td>
                             <td class="tipo text-center align-middle"><p><%= entrada.getEmail()%></p></td>
+                            <td class="tipo text-center align-middle"><p><%= entrada.getSala()%></p></td>
+                            <td class="tipo text-center align-middle"><p><%= entrada.getTituloPelicula()%></p></td>
                         </tr>
                     </tbody>
                     <%}%>

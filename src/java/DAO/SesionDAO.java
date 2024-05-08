@@ -50,8 +50,6 @@ public class SesionDAO {
 
         } catch (SQLException e) {
             // Manejar la excepción
-        } finally {
-            ConexionDB.cerrarConexion(conexion);
         }
 
         return sesion;
@@ -105,7 +103,7 @@ public class SesionDAO {
             }
 
             // Consulta SQL para insertar una nueva sala
-            String consulta = "INSERT INTO Sesiones (fecha, hora, salaId, peliculaId, asientos) VALUES (?, ?, ?, ?)";
+            String consulta = "INSERT INTO Sesiones (fecha, hora, salaId, peliculaId, asientos) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = conexion.prepareStatement(consulta);
 
             // Establecer los valores de los parámetros de la consulta
@@ -208,6 +206,10 @@ public class SesionDAO {
     // Método para eliminar una sesión
     public int eliminarSesion(int id_) {
         try {
+            Sesion sesion = getSesionById(id_);
+            if (sesion.getAsientosReservados() != null) {
+                return 2;
+            }
             // Consulta SQL para eliminar una sesión por su ID
             String consulta = "DELETE FROM sesiones WHERE id=?";
             PreparedStatement statement = conexion.prepareStatement(consulta);

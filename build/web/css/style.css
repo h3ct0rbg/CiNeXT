@@ -92,8 +92,21 @@ button {
     cursor: pointer;
 }
 
+button.filter {
+    background-color: initial; /* Restablecer el color de fondo a su valor inicial */
+    color: white;
+    padding: initial; /* Restablecer el relleno a su valor inicial */
+    border: initial; /* Restablecer el borde a su valor inicial */
+    border-radius: initial; /* Restablecer el radio del borde a su valor inicial */
+    cursor: auto; /* Cambiar el cursor de nuevo a su valor inicial (predeterminado) */
+}
+
 button:hover {
     background-color: #2980b9;
+}
+
+button.filter:hover {
+    background-color: initial; /* Restablecer el color de fondo a su valor inicial en hover */
 }
 
 a {

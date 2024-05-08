@@ -108,6 +108,13 @@ public class SesionServlet extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/sesiones?accion=mostrar");
                 dispatcher.forward(request, response);
             }
+            
+            case 2 -> {
+                // Manejar el error si la sesión ya se encuentra registrada
+                request.setAttribute("error", "Ya hay entradas reservadas para esta sesión");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/sesiones?accion=mostrar");
+                dispatcher.forward(request, response);
+            }
 
             default -> {
                 // Manejar el error

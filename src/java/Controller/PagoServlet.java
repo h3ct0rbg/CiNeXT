@@ -62,20 +62,16 @@ public class PagoServlet extends HttpServlet {
             
             for (Asiento asiento : listaAsientos) {
                 Entrada entrada = new Entrada(idSesion, asiento.getFilas(), asiento.getColumnas(), usuario.getEmail());
-                System.out.println("Sesión: "+entrada.getSesionId());
-                System.out.println("Fila: "+entrada.getFilas());
-                System.out.println("Columna: "+entrada.getColumnas());
-                System.out.println(entrada.getEmail());
                 EntradaDAO entradaDAO = new EntradaDAO();
                 entradaDAO.insertarEntrada(entrada);
             }      
             
             // Redirigir a la página de salas si el registro fue exitoso
-            request.setAttribute("sucess", "Compra realizada con éxito");
+            request.getSession().setAttribute("sucess", "Compra realizada con éxito");
             response.sendRedirect(request.getContextPath());
         } else {
             // Manejar el error
-            request.setAttribute("error", "Error al reservar los asientos");
+            request.getSession().setAttribute("error", "Error al reservar los asientos");
             response.sendRedirect(request.getContextPath());
         }
     }

@@ -51,11 +51,8 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("/Cine/admin/peliculas"); // Cambia al nombre de tu página de área de administración
             }
         } else {
-            // Manejar el error o mostrar un mensaje al usuario
-            request.setAttribute("error", "Credenciales incorrectas, por favor, intenta nuevamente");
-
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            request.getSession().setAttribute("error", "Credenciales incorrectas, por favor, intenta nuevamente");
+            response.sendRedirect(request.getContextPath() + "/login");                
         }
     }
 }

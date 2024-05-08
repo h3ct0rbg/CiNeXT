@@ -49,6 +49,7 @@ class MyHeaderLogged extends HTMLElement {
                         <li class="zoom"><a href="/Cine">Peliculas</a></li>
                         <li class="zoom"><a href="#">Salas</a></li>
                         <li class="zoom"><a href="#">Estrenos</a></li>
+                        <li class="zoom"><a href="/Cine/mis-peliculas">Mis Películas</a></li>
                     </ul>
                 </nav>
                 <nav>
@@ -66,6 +67,7 @@ class MyHeaderLogged extends HTMLElement {
                     <a href="/Cine">Peliculas</a>
                     <a href="#">Salas</a>
                     <a href="#">Estrenos</a>
+                    <a href="/Cine/mis-peliculas">Mis Películas</a>
                 </div>
             </div>
         `

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EntradaDAO {
@@ -23,19 +24,29 @@ public class EntradaDAO {
 
         try {
             // Consulta SQL para obtener todas las entradas del usuario
-            String consulta = "SELECT id, sesionId, fila, columna, usuarioEmail FROM entradas";
+            String consulta = "SELECT E.ID, H.FECHA, FILA, COLUMNA, U.NOMBRE, E.USUARIOEMAIL, SESIONID, S.NOMBRE, P.TITULO "
+                    + "FROM ENTRADAS E "
+                    + "INNER JOIN USUARIOS U ON E.USUARIOEMAIL = U.EMAIL "
+                    + "INNER JOIN SESIONES H ON E.SESIONID = H.ID "
+                    + "INNER JOIN SALAS S ON H.SALAID = S.ID "
+                    + "INNER JOIN PELICULAS P ON H.PELICULAID = P.ID "
+                    + "ORDER BY H.FECHA;";
             PreparedStatement statement = conexion.prepareStatement(consulta);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
                 // Crear objeto Entrada con los datos obtenidos de la base de datos
-                int id = resultSet.getInt("id");
-                int sesionId = resultSet.getInt("sesionId");
-                int fila = resultSet.getInt("fila");
-                int columna = resultSet.getInt("columna");
-                String usuarioEmail = resultSet.getString("usuarioEmail");
+                int id = resultSet.getInt(1);
+                Date fecha = resultSet.getDate(2);
+                int fila = resultSet.getInt(3);
+                int columna = resultSet.getInt(4);
+                String nombreUsuario = resultSet.getString(5);
+                String usuarioEmail = resultSet.getString(6);
+                int sesionId = resultSet.getInt(7);
+                String sala = resultSet.getString(8);
+                String tituloPelicula = resultSet.getString(9);
 
-                Entrada entrada = new Entrada(id, sesionId, fila, columna, usuarioEmail);
+                Entrada entrada = new Entrada(id, sesionId, fila, columna, usuarioEmail, nombreUsuario, fecha, sala, tituloPelicula);
                 entradas.add(entrada);
             }
 

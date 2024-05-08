@@ -187,8 +187,6 @@ public class SalaDAO {
 
         } catch (SQLException e) {
             // Manejar la excepción
-        } finally {
-            ConexionDB.cerrarConexion(conexion);
         }
 
         return salaExistente;

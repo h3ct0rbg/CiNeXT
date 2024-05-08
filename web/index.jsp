@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="/Cine/css/style.css">
         <link rel="stylesheet" type="text/css" href="/Cine/css/navbar.css">
         <link rel="stylesheet" type="text/css" href="/Cine/css/peliculas.css">
+        <script type="text/javascript" src="/Cine/js/fadeout.js"></script>
         <script type="text/javascript" src="/Cine/js/htmlElements.js"></script>
     </head>
     <body>
@@ -24,18 +25,44 @@
             Usuario usuario = (Usuario) session.getAttribute("usuario");
             if (usuario == null) {
         %>
-            <my-header></my-header> <!-- Header personalizado -->
+    <my-header></my-header> <!-- Header personalizado -->
         <%
             } else {
         %>
-            <my-header-logged></my-header-logged> <!-- Header personalizado para sesión iniciada -->
+    <my-header-logged></my-header-logged> <!-- Header personalizado para sesión iniciada -->
         <%
             }
         %>
-            
-        <script type="text/javascript" src="/Cine/js/mobile.js"></script>
+
+    <script type="text/javascript" src="/Cine/js/mobile.js"></script>
+
+    <section>
+        <!-- Mostrar el mensaje de error si está presente -->
+        <div class="container">
+            <% 
+            String errorMensaje = (String) request.getSession().getAttribute("error"); 
+            request.getSession().removeAttribute("error");
+            %>
+            <% if (errorMensaje != null && !errorMensaje.isEmpty()) { %>
+            <div id="errorDiv" class="error">
+                <%= errorMensaje %>
+            </div>
+            <% } %>
+        </div>
+
+        <!-- Mostrar el mensaje de acierto si está presente -->
+        <div class="container">
+            <% 
+            String sucessMensaje = (String) request.getSession().getAttribute("sucess"); 
+            request.getSession().removeAttribute("sucess");
+            %>
+            <% if (sucessMensaje != null && !sucessMensaje.isEmpty()) { %>
+            <div id="sucessDiv" class="sucess">
+                <%= sucessMensaje %>
+            </div>
+            <% } %>
+        </div>
         
-        <section>
         <%
             // Obtener la lista de películas desde la base de datos
             PeliculaDAO peliculaDAO = new PeliculaDAO();

@@ -10,19 +10,6 @@ section {
     margin: 2%;
 }
 
-/* Estilo para .poster */
-.poster {
-    flex-shrink: 0;
-    margin-right: 20px;
-    text-align: center; /* Alinea la imagen al centro */
-}
-
-.poster img {
-    height: 430px;
-    object-fit: cover;
-    max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
-}
-
 /* Estilo para .info */
 .info {
     margin-right: 15%;

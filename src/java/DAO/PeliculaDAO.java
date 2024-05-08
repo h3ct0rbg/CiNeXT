@@ -50,6 +50,42 @@ public class PeliculaDAO {
 
         return peliculas;
     }
+    
+    // Método para obtener una película por su id
+    public Pelicula getPeliculaById(int id_) {
+        Pelicula pelicula = null;
+
+        try {
+            // Consulta SQL para obtener una película por su ID
+            String consulta = "SELECT id, titulo, sinopsis, anio, genero, duracion, director, clasificacionedad, imagen FROM peliculas WHERE id=?";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setInt(1, id_);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                // Crear objeto Pelicula con los datos obtenidos de la base de datos
+                int id = resultSet.getInt("id");
+                String titulo = resultSet.getString("titulo");
+                String sinopsis = resultSet.getString("sinopsis");
+                int anio = resultSet.getInt("anio");
+                String genero = resultSet.getString("genero");
+                int duracion = resultSet.getInt("duracion");
+                String director = resultSet.getString("director");
+                String clasificacionEdad = resultSet.getString("clasificacionedad");
+                byte[] imagen = resultSet.getBytes("imagen");
+
+                pelicula = new Pelicula(id, titulo, sinopsis, anio, genero, duracion, director, clasificacionEdad, imagen);
+            }
+
+        } catch (SQLException e) {
+            // Manejar la excepción
+        } finally {
+            ConexionDB.cerrarConexion(conexion);
+        }
+
+        return pelicula;
+    }
 
     // Método para obtener una película por su titulo
     public Pelicula getPeliculaByTitulo(String title) {
@@ -96,6 +132,44 @@ public class PeliculaDAO {
             String consulta = "SELECT id, titulo, sinopsis, anio, genero, duracion, director, clasificacionedad, imagen FROM peliculas";
             PreparedStatement statement = conexion.prepareStatement(consulta);
 
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                // Crear objeto Pelicula con los datos obtenidos de la base de datos
+                int id = resultSet.getInt("id");
+                String titulo = resultSet.getString("titulo");
+                String sinopsis = resultSet.getString("sinopsis");
+                int anio = resultSet.getInt("anio");
+                String genero = resultSet.getString("genero");
+                int duracion = resultSet.getInt("duracion");
+                String director = resultSet.getString("director");
+                String clasificacionEdad = resultSet.getString("clasificacionedad");
+                byte[] imagen = resultSet.getBytes("imagen");
+
+                Pelicula pelicula = new Pelicula(id, titulo, sinopsis, anio, genero, duracion, director, clasificacionEdad, imagen);
+                peliculas.add(pelicula);
+            }
+
+        } catch (SQLException e) {
+            // Manejar la excepción
+        } finally {
+            ConexionDB.cerrarConexion(conexion);
+        }
+
+        return peliculas;
+    }
+    
+    // Método para mostrar todas las películas
+    public List<Pelicula> mostrarPeliculasVistas(String email) {
+        List<Pelicula> peliculas = new ArrayList<>();
+
+        try {
+            // Consulta SQL para obtener todas las películas
+            String consulta = "SELECT DISTINCT P.ID, P.TITULO, P.SINOPSIS, P.ANIO, P.GENERO, P.DURACION, P.DIRECTOR, P.CLASIFICACIONEDAD, P.IMAGEN "
+                    + "FROM PELICULAS P "
+                    + "INNER JOIN (SELECT PELICULAID FROM ENTRADAS E INNER JOIN SESIONES H ON E.SESIONID = H.ID WHERE E.USUARIOEMAIL = ?) X ON P.ID = X.PELICULAID";
+            PreparedStatement statement = conexion.prepareStatement(consulta);
+            statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {

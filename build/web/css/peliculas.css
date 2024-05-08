@@ -38,3 +38,16 @@
     color: #666;
     text-align: center;
 }
+
+/* Estilo para .poster */
+.poster {
+    flex-shrink: 0;
+    margin-right: 20px;
+    text-align: center; /* Alinea la imagen al centro */
+}
+
+.poster img {
+    height: 430px;
+    object-fit: cover;
+    max-width: 100%; /* Asegura que la imagen no sobrepase el ancho del contenedor */
+}

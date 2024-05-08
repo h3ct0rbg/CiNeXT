@@ -2,6 +2,7 @@
 <%@ page import="Model.Usuario" %>
 <%@ page import="Model.Pelicula" %>
 <%@ page import="Model.Sesion" %>
+<%@ page import="Model.Comentario" %>
 <%@ page import="DAO.PeliculaDAO" %>
 <%@ page import="DAO.SesionDAO" %>
 <%@ page import="java.lang.Integer" %>
@@ -22,6 +23,7 @@
         <link rel="stylesheet" type="text/css" href="/Cine/css/peliculas.css">
         <link rel="stylesheet" type="text/css" href="/Cine/css/detallesPelicula.css">
         <link rel="stylesheet" type="text/css" href="/Cine/css/carrusel.css">
+        <link rel="stylesheet" type="text/css" href="/Cine/css/comentarios.css">
         <script type="text/javascript" src="/Cine/js/htmlElements.js"></script>
         <title>CiNeXT</title>
     </head>
@@ -100,7 +102,27 @@
                 }
             %>
         </div>
-
+        
+        <div class="container-comments">
+            <%
+            List<Comentario> comentarios = (List) request.getAttribute("comentarios");
+            for(Comentario comentario : comentarios){
+            %>
+            <div class="comments">
+                
+                <div class="info-comments">
+                   
+                    <div class="header">
+                        <h4>Usuario Anónimo</h4>
+                        <h5><%= comentario.getPuntuacion() %></h5>
+                    </div>
+                    
+                    <p><%= comentario.getComentario() %></p>
+                </div>
+                
+            </div>
+            <%}%>
+        </div>
 
     </section>
 </body>

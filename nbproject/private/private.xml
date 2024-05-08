@@ -5,17 +5,12 @@
             <url>src/java/DAO/PeliculaDAO.java</url>
             <bookmark id="1">
                 <name/>
-                <line>128</line>
+                <line>202</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/web/adminEntradas.jsp</file>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/src/java/DAO/EntradaDAO.java</file>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/src/java/Controller/PagoServlet.java</file>
-            <file>file:/D:/UAH/4º%20GISI/Arquitectura%20y%20Diseño%20Web%20y%20C-S/Práctica%20Final/Cine/src/java/Controller/EntradaServlet.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

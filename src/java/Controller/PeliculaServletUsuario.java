@@ -1,8 +1,10 @@
 package Controller;
 
 
+import DAO.ComentarioDAO;
 import DAO.PeliculaDAO;
 import DAO.SesionDAO;
+import Model.Comentario;
 import Model.Pelicula;
 import Model.Sesion;
 import jakarta.servlet.ServletException;
@@ -39,6 +41,10 @@ public class PeliculaServletUsuario extends HttpServlet {
         SesionDAO sesionDAO = new SesionDAO();
         List<Sesion> sesiones = sesionDAO.getSesionByPelicula(pelicula.getId());
         request.setAttribute("sesiones", sesiones);
+        
+        ComentarioDAO comentarioDAO = new ComentarioDAO();
+        List<Comentario> comentarios = comentarioDAO.getComentariosByIdPelicula(pelicula.getId());
+        request.setAttribute("comentarios", comentarios);
         
         request.getRequestDispatcher("/detallesPelicula.jsp").forward(request, response);
     }
